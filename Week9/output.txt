@@ -1,0 +1,1 @@
+Ghi dữ liệu bằng luồng character
