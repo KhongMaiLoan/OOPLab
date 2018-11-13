@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package week10;
+package tree;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.BufferedReader;
@@ -76,24 +76,27 @@ public class Week10 {
     /**
      * getAllfunction là 1 phương thức dùng tra ve cac ham static
      *
-     * @param file can tim
+    * @param file can tim
      * @return day String
      */
     
     public static List<String> getAllFunctions(File path) {
+        boolean open=false;
+        int n =0;
         List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if(line.contains("/*"))
+                {
+                    continue;
+                }
                 if(line.contains("static"))
                 {
-                    list.add(line);
-                    while((line = br.readLine()) != null)
-                    {
-                        list.add(line);
-                    }
-                    return list;
+                    open=true;
                 }
+                if(open==true) list.add(line);
+                if(line.contains("*/")) open=false;
  
             }
         }
@@ -150,4 +153,3 @@ public class Week10 {
 
         }
     }
-
